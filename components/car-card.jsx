@@ -1,9 +1,21 @@
-import React from 'react'
+"use client"
+
+import React, {useState} from 'react'
 import { Card } from './ui/card'
 import Image from 'next/image'
 import { Button } from './ui/button'
+import { CardContent } from './ui/card'
+import { Heart } from 'lucide-react'
+import { Badge } from './ui/badge'
+import { useRouter } from 'next/navigation'
+
+
 
 const CarCard = ({car}) => {
+    const router = useRouter();
+    const [isSaved, setIsSaved] = useState(car.wishlisted);
+    const handleToggleSave = async (e) => {};
+
   return (
      <Card className="overflow-hidden hover:shadow-lg transition group">
       <div className="relative h-48">
@@ -31,13 +43,9 @@ const CarCard = ({car}) => {
               : "text-gray-600 hover:text-gray-900"
           }`}
           onClick={handleToggleSave}
-          disabled={isToggling}
+        
         >
-          {isToggling ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
-          ) : (
-            <Heart className={isSaved ? "fill-current" : ""} size={20} />
-          )}
+          <Heart className={isSaved ? "fill-current" : ""} size={20} />
         </Button>
       </div>
 
