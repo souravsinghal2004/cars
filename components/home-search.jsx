@@ -7,9 +7,10 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useDropzone } from "react-dropzone";
 import { useRouter } from "next/navigation";
+import { processImageSearch } from "@/actions/home";
 
 import useFetch from "@/hooks/use-fetch";
- const processImageSearch = () =>{};
+
 
 const HomeSearch = () => {
   const router = useRouter();
@@ -115,15 +116,28 @@ const HomeSearch = () => {
       <form onSubmit={handleTextSearch}>
         <div className="relative flex items-center">
           <Search className="absolute left-3 w-5 h-5" />
-          <Input
-            type="text"
-            placeholder="Enter make, model, or use our AI Image Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 pr-12 py-6 w-full rounded-full border-gray-300 bg-white/95 backdrop-blur-sm"
-          />
+         <>
+  {/* Small screens */}
+  <Input
+    type="text"
+    placeholder="Search cars..."
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+    className="sm:hidden pl-10 pr-12 py-6 w-full rounded-full border-gray-300 bg-white/95 backdrop-blur-sm"
+  />
 
-          {/* Image Search Button */}
+  {/* Medium and up */}
+  <Input
+    type="text"
+    placeholder="Enter make, model, or use our AI Image Search..."
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+    className="hidden sm:block pl-10 pr-12 py-6 w-full rounded-full border-gray-300 bg-white/95 backdrop-blur-sm"
+  />
+</>
+
+
+  {/* Image Search Button */}
           <div className="absolute right-[100px]">
             <Camera
               size={35}

@@ -8,15 +8,18 @@ import {
 } from "@/components/ui/accordion";
 import HomeSearch from "@/components/home-search";
 import { SignedOut } from "@clerk/nextjs";
-import CarCard from "@/components/car-card";
+import { CarCard} from "@/components/car-card";
 import Link from "next/link";
-import { carMakes , faqItems ,bodyTypes , featuredCars} from "@/lib/data";
+import { carMakes , faqItems ,bodyTypes} from "@/lib/data";
 import Image from "next/image";
+import { getFeaturedCars } from "@/actions/home";
 
 
 
 
-export default function Home() {
+export default async function Home() {
+  const featuredCars = await getFeaturedCars();
+
   return (
     <div className="pt-20 flex flex-col">
 
@@ -32,7 +35,7 @@ export default function Home() {
                  Find Your Cars With WheelDeal AI</h1>
 
                   <p className="text-xl text-gray-500 mb-8 max-w-2xl mx-auto">
-                   Advanced AI Car Search and test drive from thousands of vehicles.
+                   Advanced AI Car Search and car from thousands of vehicles.
             </p>
                 </div>
 
@@ -127,9 +130,9 @@ export default function Home() {
               <div className="bg-blue-100 text-blue-700 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <Calendar className="h-8 w-8" />
               </div>
-              <h3 className="text-xl font-bold mb-2">Easy Test Drive</h3>
+              <h3 className="text-xl font-bold mb-2">Easy car</h3>
               <p className="text-gray-600">
-                Book a test drive online in minutes, with flexible scheduling
+                Book a car online in minutes, with flexible scheduling
                 options.
               </p>
             </div>
