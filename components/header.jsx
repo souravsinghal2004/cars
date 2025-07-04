@@ -15,7 +15,7 @@ const Header = async ({ isAdminPage = false }) => {
 
       <nav className="mx-auto px-4 py-4 flex items-center justify-between">
         <Link href={isAdminPage ? "/admin" : "/"} className="flex items-center space-x-6">
-  <Image
+  <Image                                                              unoptimized 
     src={"/logo.png"}
     alt="Wheel-Deal Logo"
     width={500}

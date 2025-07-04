@@ -215,7 +215,7 @@ export const CarsList = () => {
                       <TableCell>
                         <div className="w-10 h-10 rounded-md overflow-hidden">
                           {car.images && car.images.length > 0 ? (
-                            <Image
+                            <Image                                                              unoptimized 
                               src={car.images[0]}
                               alt={`${car.make} ${car.model}`}
                               height={40}

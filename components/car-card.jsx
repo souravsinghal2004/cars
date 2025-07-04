@@ -63,7 +63,7 @@ export const CarCard = ({ car }) => {
       <div className="relative h-48">
         {car.images && car.images.length > 0 ? (
           <div className="relative w-full h-full">
-            <Image
+            <Image                                                              unoptimized 
               src={car.images[0]}
               alt={`${car.make} ${car.model}`}
               fill

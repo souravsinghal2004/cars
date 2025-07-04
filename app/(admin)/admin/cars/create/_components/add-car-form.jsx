@@ -628,7 +628,7 @@ if (matches && matches.length > 0) {
                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                         {uploadedImages.map((image, index) => (
                           <div key={index} className="relative group">
-                            <Image
+                            <Image                                                              unoptimized 
                               src={image}
                               alt={`Car image ${index + 1}`}
                               height={50}

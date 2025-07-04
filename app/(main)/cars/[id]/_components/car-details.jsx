@@ -115,7 +115,7 @@ export function CarDetails({ car, testDriveInfo }) {
         <div className="w-full lg:w-7/12">
           <div className="aspect-video rounded-lg overflow-hidden relative mb-4">
             {car.images && car.images.length > 0 ? (
-              <Image
+              <Image                                                              unoptimized 
                 src={car.images[currentImageIndex]}
                 alt={`${car.year} ${car.make} ${car.model}`}
                 fill
@@ -142,7 +142,7 @@ export function CarDetails({ car, testDriveInfo }) {
                   }`}
                   onClick={() => setCurrentImageIndex(index)}
                 >
-                  <Image
+                  <Image                                                              unoptimized 
                     src={image}
                     alt={`${car.year} ${car.make} ${car.model} - view ${
                       index + 1

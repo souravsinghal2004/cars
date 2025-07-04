@@ -75,7 +75,7 @@ export function TestDriveCard({
           <div className="sm:w-1/4 relative h-40 sm:h-auto">
             {booking.car.images && booking.car.images.length > 0 ? (
               <div className="relative w-full h-full">
-                <Image
+                <Image                                                              unoptimized 
                   src={booking.car.images[0]}
                   alt={`${booking.car.make} ${booking.car.model}`}
                   fill
