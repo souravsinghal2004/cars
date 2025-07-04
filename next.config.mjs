@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-      experimental: {
-    serverComponentsHmrCache: false, // defaults to true
+  experimental: {
+    serverComponentsHmrCache: false,
   },
   images: {
     remotePatterns: [
@@ -12,8 +12,5 @@ const nextConfig = {
     ],
   },
 };
-
-
-
 
 export default nextConfig;
