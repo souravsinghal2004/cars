@@ -5,7 +5,7 @@ import Link from "next/link";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { checkUser } from "@/lib/checkUser";
 import Image from "next/image";
-
+import { Home  } from "lucide-react";
 const Header = async ({ isAdminPage = false }) => {
   const user = await checkUser();
   const isAdmin = user?.role === "ADMIN";
@@ -18,9 +18,9 @@ const Header = async ({ isAdminPage = false }) => {
   <Image
     src={"/logo.png"}
     alt="Wheel-Deal Logo"
-    width={200}
-    height={60}
-    className="h-12 w-auto object-contain"
+    width={500}
+    height={260}
+    className="h-12 w-auto object-contain scale-200"
   />
   {isAdminPage && (
     <span className="text-xl font-bold text-black ">Admin</span>
@@ -32,12 +32,17 @@ const Header = async ({ isAdminPage = false }) => {
         <div className="flex items-center space-x-4">
           {isAdminPage ? (
             <>
-              <Link href="/">
-                <Button variant="outline" className="flex items-center gap-2">
-                  <ArrowLeft size={18} />
-                  <span>Back to App</span>
-                </Button>
-              </Link>
+           <Link href="/">
+  <Button variant="outline" className="flex items-center gap-2">
+    {/* Mobile: Home icon only */}
+    <Home size={18} className="md:hidden" />
+
+    {/* Desktop: Arrow + text */}
+    <ArrowLeft size={18} className="hidden md:block" />
+    <span className="hidden md:inline">Back to App</span>
+  </Button>
+</Link>
+
             </>
           ) : (
             <SignedIn>
