@@ -13,7 +13,7 @@ import Link from "next/link";
 import { carMakes , faqItems ,bodyTypes} from "@/lib/data";
 import Image from "next/image";
 import { getFeaturedCars } from "@/actions/home";
-
+import SmartLink from "@/components/smartLink";
 
 
 
@@ -30,9 +30,12 @@ export default async function Home() {
                <div className="max-w-4xl mx-auto text-center">
 
                 <div className="mb-8">
-                  
-                  <h1 className="text-5xl md:text-8xl mb-4 gradient-title">
-                 Find Your Cars With WheelDeal AI</h1>
+                 <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-tight 
+  text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 
+  dark:text-white dark:bg-none">
+  Find Your Cars With WheelDeal AI
+</h1>
+
 
                   <p className="text-xl text-gray-500 mb-8 max-w-2xl mx-auto">
                    Advanced AI Car Search and car from thousands of vehicles.
@@ -55,9 +58,9 @@ export default async function Home() {
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-2xl font-bold">Featured Cars</h2>
             <Button variant="ghost" className="flex items-center">
-              <Link href="/cars">
+              <SmartLink href="/cars">
                 View All <ChevronRight className="ml-1 h-4 w-4" />
-              </Link>
+              </SmartLink>
             </Button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -77,14 +80,14 @@ export default async function Home() {
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-2xl font-bold">Browse by Make</h2>
             <Button variant="ghost" className="flex items-center" asChild>
-              <Link href="/cars">
+              <SmartLink href="/cars">
                 View All <ChevronRight className="ml-1 h-4 w-4" />
-              </Link>
+              </SmartLink>
             </Button>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {carMakes.map((make) => (
-              <Link
+              <SmartLink
                 key={make.name}
                 href={`/cars?make=${make.name}`}
                 className="bg-white rounded-lg shadow p-4 text-center hover:shadow-md transition cursor-pointer"
@@ -100,7 +103,7 @@ export default async function Home() {
 
                 </div>
                 <h3 className="font-medium">{make.name}</h3>
-              </Link>
+              </SmartLink>
             ))}
           </div>
         </div>
@@ -155,14 +158,14 @@ export default async function Home() {
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-2xl font-bold">Browse by Body Type</h2>
             <Button variant="ghost" className="flex items-center" asChild>
-              <Link href="/cars">
+              <SmartLink href="/cars">
                 View All <ChevronRight className="ml-1 h-4 w-4" />
-              </Link>
+              </SmartLink>
             </Button>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {bodyTypes.map((type) => (
-              <Link
+              <SmartLink
                 key={type.name}
                 href={`/cars?bodyType=${type.name}`}
                 className="relative group cursor-pointer"
@@ -182,7 +185,7 @@ export default async function Home() {
                     {type.name}
                   </h3>
                 </div>
-              </Link>
+              </SmartLink>
             ))}
           </div>
         </div>
@@ -217,11 +220,11 @@ export default async function Home() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button size="lg" variant="secondary" asChild>
-              <Link href="/cars">View All Cars</Link>
+              <SmartLink href="/cars">View All Cars</SmartLink>
             </Button>
             <SignedOut>
               <Button size="lg" asChild>
-                <Link href="/sign-up">Sign Up Now</Link>
+                <SmartLink href="/sign-up">Sign Up Now</SmartLink>
               </Button>
             </SignedOut>
           </div>

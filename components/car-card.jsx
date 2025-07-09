@@ -18,7 +18,6 @@ export const CarCard = ({ car }) => {
   const router = useRouter();
   const [isSaved, setIsSaved] = useState(car.wishlisted);
 
-  // Use the useFetch hook
   const {
     loading: isToggling,
     fn: toggleSavedCarFn,
@@ -26,7 +25,7 @@ export const CarCard = ({ car }) => {
     error: toggleError,
   } = useFetch(toggleSavedCar);
 
-  // Handle toggle result with useEffect
+  // Update local state after toggle
   useEffect(() => {
     if (toggleResult?.success && toggleResult.saved !== isSaved) {
       setIsSaved(toggleResult.saved);
@@ -34,14 +33,34 @@ export const CarCard = ({ car }) => {
     }
   }, [toggleResult, isSaved]);
 
-  // Handle errors with useEffect
+  // Handle toggle error
   useEffect(() => {
     if (toggleError) {
       toast.error("Failed to update favorites");
     }
   }, [toggleError]);
 
-  // Handle save/unsave car
+  // Hydrate saved status on mount (optional fallback)
+  useEffect(() => {
+    const fetchWishlistedStatus = async () => {
+      try {
+        const res = await fetch("/api/saved-cars");
+        const json = await res.json();
+        if (json.success) {
+          const savedIds = json.data.map((c) => c.id);
+          setIsSaved(savedIds.includes(car.id));
+        }
+      } catch (error) {
+        console.error("Failed to fetch saved cars:", error);
+      }
+    };
+
+    if (isSignedIn && car?.id) {
+      fetchWishlistedStatus();
+    }
+  }, [isSignedIn, car.id]);
+
+  // Toggle save/unsave
   const handleToggleSave = async (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -54,16 +73,16 @@ export const CarCard = ({ car }) => {
 
     if (isToggling) return;
 
-    // Call the toggleSavedCar function using our useFetch hook
     await toggleSavedCarFn(car.id);
   };
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition group">
       <div className="relative h-48">
-        {car.images && car.images.length > 0 ? (
+        {car.images?.[0] ? (
           <div className="relative w-full h-full">
-            <Image                                                              unoptimized 
+            <Image
+              unoptimized
               src={car.images[0]}
               alt={`${car.make} ${car.model}`}
               fill
@@ -79,7 +98,7 @@ export const CarCard = ({ car }) => {
         <Button
           variant="ghost"
           size="icon"
-          className={`absolute top-2 right-2 bg-white/90 rounded-full p-1.5 ${
+          className={`absolute top-2 right-2 bg-white/90 dark:bg-black/60 rounded-full p-1.5 ${
             isSaved
               ? "text-red-500 hover:text-red-600"
               : "text-gray-600 hover:text-gray-900"
@@ -126,12 +145,7 @@ export const CarCard = ({ car }) => {
         </div>
 
         <div className="flex justify-between">
-          <Button
-            className="flex-1"
-            onClick={() => {
-              router.push(`/cars/${car.id}`);
-            }}
-          >
+          <Button className="flex-1" onClick={() => router.push(`/cars/${car.id}`)}>
             View Car
           </Button>
         </div>
